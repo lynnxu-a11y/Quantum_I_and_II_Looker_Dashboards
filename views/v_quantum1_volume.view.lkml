@@ -190,23 +190,24 @@ view: v_quantum1_volume {
   measure: peak_pv_generation {
     type: max
     sql: CASE
-      WHEN ${meter_type} = 'PV'
-      AND ${signal_name} = 'ActiveExportEnergy.Final'
-      THEN ${value}/1000
-    END ;;
+          WHEN ${meter_type} = 'PV'
+          AND ${signal_name} = 'ActiveExportEnergy.Final'
+          THEN ${value} / 1000
+        END ;;
     label: "Peak Solar Output (MWh)"
-    description: "Highest single interval PV reading"
+    description: "Highest single 5-minute interval PV reading in MWh"
     value_format_name: decimal_2
   }
 
   measure: avg_pv_generation {
     type: average
     sql: CASE
-      WHEN ${meter_type} = 'PV'
-      AND ${signal_name} = 'ActiveExportEnergy.Final'
-      THEN ${value}/1000
-    END ;;
+          WHEN ${meter_type} = 'PV'
+          AND ${signal_name} = 'ActiveExportEnergy.Final'
+          THEN ${value} / 1000
+        END ;;
     label: "Avg Solar Output per Interval (MWh)"
+    description: "Average energy per 5-minute interval in MWh"
     value_format_name: decimal_2
   }
 
@@ -255,7 +256,7 @@ view: v_quantum1_volume {
 
   measure: bess_net_flow {
     type: number
-    sql: (${total_bess_discharge} - ${total_bess_charge})/1000 ;;
+    sql: ${total_bess_discharge} - ${total_bess_charge} ;;
     label: "Battery Net Flow (MWh)"
     description: "Positive = net discharging, Negative = net charging"
     value_format_name: decimal_2
