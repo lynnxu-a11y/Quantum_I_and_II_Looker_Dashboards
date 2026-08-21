@@ -27,18 +27,7 @@ explore: v_quantum2_volume {
 # ─────────────────────────────────────────
 # Combined — for cross-site comparison tiles
 # ─────────────────────────────────────────
-explore: quantum_combined {
+explore: v_quantum_combined {
   label: "Quantum 1 & 2 Combined"
-  description: "Use this Explore for side-by-side Q1 vs Q2 comparisons only"
-  from: v_quantum1_volume
-  view_name: v_quantum1_volume
-
-  join: v_quantum2_volume {
-    type: full_outer
-    sql_on:
-      ${v_quantum1_volume.measurement_ts_raw} = ${v_quantum2_volume.measurement_ts_raw}
-      AND ${v_quantum1_volume.meter_type} = ${v_quantum2_volume.meter_type}
-      AND ${v_quantum1_volume.signal_name} = ${v_quantum2_volume.signal_name} ;;
-    relationship: one_to_one
-  }
+  description: "Union of Q1 and Q2 — use for all cross-site comparison tiles"
 }
